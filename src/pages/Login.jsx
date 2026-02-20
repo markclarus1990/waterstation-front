@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import API from "../api/axios";
+import API from "../api/axios_";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -26,9 +26,10 @@ export default function Login() {
     try {
       const res = await API.post("/api/auth/login", form);
 
-      const token = res.data;
+      const { token } = res.data;
+
       localStorage.setItem("token", token);
-      localStorage.setItem("username", form.username);
+
       navigate("/dashboard");
     } catch (err) {
       setError("Invalid username or password");
